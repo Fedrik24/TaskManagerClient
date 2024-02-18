@@ -1,0 +1,38 @@
+﻿@page "/login"
+@using TaskManagerClient.Client.Layout
+@layout LoginLayout
+
+
+
+<div class="rz-p-12 rz-text-align-center">
+    <h3>Login</h3>
+    <RadzenRow RowGap="5" Gap="5">
+        <RadzenColumn>
+            <p>Username</p>
+            <RadzenTextBox Change="@(args => OnChange(args, "TextBox"))" aria-label="Username" />
+        </RadzenColumn>
+        <RadzenColumn>
+            <p>Password</p>
+            <RadzenPassword @bind-Value=@value Placeholder="Enter password..." AutoComplete="false" aria-label="enter password" />
+        </RadzenColumn>
+        <RadzenColumn>
+            <RadzenButton ButtonType="ButtonType.Reset" Text="Singup"></RadzenButton>
+        </RadzenColumn>
+        <RadzenColumn>
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>
+        </RadzenColumn>
+    </RadzenRow>
+</div>
+
+<RadzenColumn>
+    <RadzenButton ButtonType="ButtonType.Button" Text="Back"></RadzenButton>
+</RadzenColumn>
+
+@code {
+    string value;
+
+    void OnChange(string value, string name)
+    {
+        Console.WriteLine($"Name : {value} change : {name}");
+    }
+}

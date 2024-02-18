@@ -9,10 +9,9 @@
     </RadzenHeader>
     <RadzenSidebar @bind-Expanded="@sidebarExpanded">
         <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Home" Icon="home">
-                <a href="/counter" />
-            </RadzenPanelMenuItem>
-            <RadzenPanelMenuItem Text="Login" Icon="account_box" />
+            <RadzenPanelMenuItem Text="Home" Icon="home" Path="/" />
+            <RadzenPanelMenuItem Text="Login" Icon="account_box" Path="/login" />
+            <RadzenPanelMenuItem Text="About" Icon="info" />
         </RadzenPanelMenu>
     </RadzenSidebar>
     <RadzenBody>
