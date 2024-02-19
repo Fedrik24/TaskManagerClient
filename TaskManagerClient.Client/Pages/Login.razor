@@ -1,6 +1,7 @@
 ﻿@page "/login"
 @using TaskManagerClient.Client.Layout
 @layout LoginLayout
+@inject IJSRuntime JSRuntime
 
 
 
@@ -25,7 +26,8 @@
 </div>
 
 <RadzenColumn>
-    <RadzenButton ButtonType="ButtonType.Button" Text="Back"></RadzenButton>
+    <RadzenButton ButtonType="ButtonType.Button" Click="@NavigateToHomePage" Text="Back" />
+
 </RadzenColumn>
 
 @code {
@@ -34,5 +36,10 @@
     void OnChange(string value, string name)
     {
         Console.WriteLine($"Name : {value} change : {name}");
+    }
+
+    private async Task NavigateToHomePage()
+    {
+        await JSRuntime.InvokeVoidAsync("window.location.assign", "/");
     }
 }
