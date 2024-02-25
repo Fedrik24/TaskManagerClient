@@ -1,4 +1,5 @@
 using TaskManagerClient.Client.Pages;
+using TaskManagerClient.Client.Utility;
 using TaskManagerClient.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddSingleton<DragAndDrop>();
 
 var app = builder.Build();
 
