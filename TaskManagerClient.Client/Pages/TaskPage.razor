@@ -5,13 +5,51 @@
 
 <h3>TaskPage</h3>
 
-<SortableList Id="sortable" Items="myItems" Context="item">
-        <SortableItemTemplate>
-            <div class="has-border has-background-white has-cursor-pointer">
-                <p class="is-size-4 p-2 ml-4">@item.Name</p>
-            </div>
-        </SortableItemTemplate>
-    </SortableList>
+<RadzenRow Gap="1" JustifyContent="JustifyContent.Normal" AlignItems="AlignItems.Normal" class="rz-border-info-light">
+    <RadzenColumn Size="3" class="rz-background-color-info-lighter rz-color-on-info-lighter rz-text-align-center rz-p-2">
+        <p>New Task</p>
+        <SortableList Group="sharedLists" Items="newTasks" Context="item" OnRemove="NewTaskRemove">
+            <SortableItemTemplate>
+                <div class=" card has-border has-background-white">
+                    <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                </div>
+            </SortableItemTemplate>
+        </SortableList>
+    </RadzenColumn>
+    <RadzenColumn Size="3" class="rz-background-color-info-lighter rz-color-on-info-lighter rz-text-align-center rz-p-2">
+        <p>Task Progress</p>
+        <SortableList Group="sharedLists" OnRemove="ProgressTaskRemove" Items="proggressTaks" Context="item">
+            <SortableItemTemplate>
+                <div class="card has-background-white has-border">
+                    <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                </div>
+            </SortableItemTemplate>
+        </SortableList>
+    </RadzenColumn>
+    <RadzenColumn Size="3" class="rz-background-color-info-lighter rz-color-on-info-lighter rz-text-align-center rz-p-2">
+        <p>Task Review</p>
+        <SortableList Group="sharedLists" OnRemove="ReviewTaskRemove" Items="reviewTaks" Context="item">
+            <SortableItemTemplate>
+                <div class="card has-background-white has-border">
+                    <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                </div>
+            </SortableItemTemplate>
+        </SortableList>
+    </RadzenColumn>
+    <RadzenColumn Size="3" class="rz-background-color-info-lighter rz-color-on-info-lighter rz-text-align-center rz-p-2">
+        <p>Task Finish</p>
+        <SortableList Group="sharedLists" OnRemove="FinishTask" Items="finishTasks" Context="item">
+            <SortableItemTemplate>
+                <div class="card has-background-white has-border">
+                    <p class="is-size-4 p-2 ml-4">@item.Name</p>
+                </div>
+            </SortableItemTemplate>
+        </SortableList>
+    </RadzenColumn>
+</RadzenRow>
+
+
+
 
 @code {
     public class Item
@@ -20,11 +58,51 @@
         public string Name { get; set; }
     }
 
-    public List<Item> myItems = new List<Item>
+    public List<Item> newTasks = new List<Item>
     {
         new Item{ Id = 1, Name = "Test"},
         new Item{ Id = 2, Name = "Test2"},
         new Item{ Id = 3, Name = "Test3"},
         new Item{ Id = 4, Name = "Test4"}
     };
+
+    public List<Item> proggressTaks = new List<Item>();
+    public List<Item> reviewTaks = new List<Item>();
+    public List<Item> finishTasks = new List<Item>();
+
+
+    private void NewTaskRemove((int oldIndex, int newIndex) indices)
+    {
+        var item = newTasks[indices.oldIndex];
+
+        proggressTaks.Insert(indices.newIndex, item);
+
+        newTasks.Remove(newTasks[indices.oldIndex]);
+    }
+
+    private void ProgressTaskRemove((int oldIndex, int newIndex) indices)
+    {
+        var item = proggressTaks[indices.oldIndex];
+
+        reviewTaks.Insert(indices.newIndex, item);
+
+        proggressTaks.Remove(proggressTaks[indices.oldIndex]);
+    }
+
+    private void ReviewTaskRemove((int oldIndex, int newIndex) indices)
+    {
+        var item = proggressTaks[indices.oldIndex];
+
+        finishTasks.Insert(indices.newIndex, item);
+
+        reviewTaks.Remove(proggressTaks[indices.oldIndex]);
+    }
+
+    private void FinishTask((int oldIndex, int newIndex) indices)
+    {
+        var item = proggressTaks[indices.oldIndex];
+
+        finishTasks.Insert(indices.newIndex, item);
+    }
 }
+

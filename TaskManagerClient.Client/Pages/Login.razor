@@ -20,7 +20,7 @@
             <RadzenButton ButtonType="ButtonType.Reset" Text="Singup"></RadzenButton>
         </RadzenColumn>
         <RadzenColumn>
-            <RadzenButton ButtonType="ButtonType.Submit" Text="Submit"></RadzenButton>
+            <RadzenButton ButtonType="ButtonType.Submit" Text="Submit" Click="@NavigateToTaskPage"></RadzenButton>
         </RadzenColumn>
     </RadzenRow>
 </div>
@@ -40,5 +40,10 @@
     private void NavigateToHomePage()
     {
         Nav.NavigateTo("/");
+    }
+
+    private void NavigateToTaskPage()
+    {
+        Nav.NavigateTo("/task");
     }
 }
