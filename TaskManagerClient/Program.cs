@@ -8,8 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddSingleton<DragAndDrop>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
